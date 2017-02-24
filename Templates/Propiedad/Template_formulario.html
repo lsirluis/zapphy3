@@ -1,0 +1,67 @@
+{% extends "admin/base_site.html" %}
+{% load staticfiles %}
+{% block title%} {{title}} {%endblock%}
+
+{% block content %}
+<br>
+{% if title == "Banco no registrado" %}
+  <div>
+    <a href="{%url 'Propiedad:Solicitud_crearBanco' %}" class="btn btn-success ribbon1 base">Agregar nuevo Banco</a>
+  </div>  
+  <br>
+  <br>
+{% else %}
+ {{ form.errors}}
+
+<div id="content-main" class=" row col-xs-12">
+          	{# <div class="ribbon base"></div> #}
+
+    <form enctype="multipart/form-data" action="" method="post" id="propiedad_form" class="form-horizontal" novalidate="">
+
+
+
+    <div class=" col-xs-12 col-sm-9">
+		    {%csrf_token%}
+        <div class=" x_panel">
+        <div class="x_title">
+        <h2>Agregar Banco</h2>
+          <div class="clearfix"></div>
+       </div>
+
+          <div class="x_content ">
+          	{# <div class="ribbon base"></div> #}
+
+        {%block DatosFormulario %}
+
+        {%endblock%}
+
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+            <div class="col-xs-12 col-sm-3" style="float:right;">
+
+        <div class="box save-box x_panel">
+
+          
+      <div class="submit-row clearfix">
+        <div class="btn-group">
+          
+            <button type="submit" class="btn btn-high btn-success" name="_save"><b>Guardar</b></button>
+            {# <button type="submit" name="_continue" class=" btn btn-high">Grabar y continuar editando</button> #}
+            <button type="submit" name="_addanother" class="btn btn-primary">Grabar y añadir otro</button>
+
+        </div>
+      </div>
+    </div>   
+
+      </div>
+  </form>
+</div>
+{% endif %}
+
+{%endblock%}

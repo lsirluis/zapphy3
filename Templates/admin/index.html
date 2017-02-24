@@ -1,0 +1,56 @@
+{% extends "admin/base_site.html" %}
+{% load staticfiles %}
+
+ {# {% block breadcrumbs %} #}
+ {# {% endblock %} #}
+
+{% block content %}
+		{# <a style="width:200px; height:200px; line-height:200px;" href="{% url 'Propiedad:Solicitud_listar' %}" class="btn btn-default "><h1 style="line-height:200px;">Usuarios</h1></a> #}
+		<!-- <a style="width:200px; height:200px; line-height:200px;" href="{% url 'Propiedad:Solicitud_listar' %}" class="btn btn-default"><h1 style="line-height:200px;">Mis propiedades</h1></a> -->
+		{# <a style="width:200px; height:200px; line-height:200px;" href="{% url 'Propiedad:Solicitud_listar' %}" class="btn btn-default"><h1 style="line-height:200px;">Mis bancos</h1></a> #}
+		{# <a style="width:200px; height:200px; line-height:200px;" href="{% url 'Propiedad:Solicitud_listar' %}" class="btn btn-default"><h1 style="line-height:200px;">Notificaciones</h1></a> #}
+
+		<!-- <div id="container"> -->
+	 {# <img src="{% static 'img/zappyfondo.jpg' %}"  class="imgcentral" alt=""> #}
+	 {# <table class="PrincipalTable" border="0px"> #}
+	 	{# <tbody> #}
+	 		{# <tr> #}
+	 		<div class="PrincipalTable row">
+	 			
+	 		
+	 			<div class="PrincBpropiedades col-xs-6 col-sm-3 col-md-3 col-lg-2"><a href="{% url 'Propiedad:Solicitud_listar' %}"></a>
+	 			</div>
+	 			<div class="PrincBbancos col-xs-6 col-sm-3 col-md-3 col-lg-2"><a href="{%url 'Propiedad:Solicitud_listarBanco' %}"></a>
+	 			</div>
+	 			<div class="PrincBfacturas col-xs-6 col-sm-3 col-md-3 col-lg-2"><a href="#"></a>
+	 			</div>
+	 			<div class="PrincBregpagos col-xs-6 col-sm-3 col-md-3 col-lg-2"><a href="#"></a>
+	 			</div>
+	 		{# </tr> #}
+	 		{# <tr> #}
+	 			<div class="PrincBnotifi col-sm-12 col-sm-3 col-md-3 col-lg-2"><a href="{% url 'Propiedad:Solicitud_listarNoticias'%}"></a>
+	 			</div>
+	 			
+	 		{# </tr> #}
+	 	{# </tbody> #}
+	 {# </table> #}
+</div>
+	<!--<div class="row">
+    <div class="col-md-12">
+    	<div>
+		<h2>Conectate a nuestras redes<br /></h2>
+                            <div class="col-md-6 .col-md-offset-3">
+                                 <ul class="social">
+                                  <li class="facebook"><a href="http://facebook.com/alterowo"><i class="fa fa-facebook fa-3x"></i></a></li>
+                                  <li class="twitter"><a href="http://twitter.com/Kyokushinowa"><i class="fa fa-twitter fa-3x"></i></a></li>
+                                  <li class="pinterest"><a href="http://www.pinterest.com/beatagibalska/"><i class="fa fa-pinterest-p fa-3x"></i></a></li>
+                                  <li class="behance"><a href="https://www.behance.net/Kurnikowa"><i class="fa fa-behance fa-3x"></i></a></li>
+                                </ul>
+                          </div>
+    </div>
+    </div>
+    </div>
+-->
+{% endblock %}
+
+

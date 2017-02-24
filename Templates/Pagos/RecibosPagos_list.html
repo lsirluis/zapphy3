@@ -1,0 +1,56 @@
+td>
+          <td colspan="1">
+             <input type="text" class="xsinput" id="id_numero" name="apartamento" readonly value="{{object_list.0.unidad.numero}}">
+                <b>Torre #</b>
+             <input type="text" class="xsinput" id="id_torre" name="torre" readonly value="{{object_list.0.unidad.torre}}">
+            {# <span class="errorlist"><b>Facturas en deuda:</b></span> #}
+          </td>
+          <td style="text-align:right;"><span class="errorlist"><b>Factura Pagada:</b></span></td>
+          <td colspan="1">
+           <span id="id_fact"></span>
+         </td>
+        {# <td class="last"></td> #}
+        </tr>
+        {# linea4 #}        
+        <tr>
+          <td><b>La suma de :</b></td>
+          <td colspan="2">
+             <input type="number" min="0" class="input-medium" name="suma" id="id_suma" onkeyup="aletras()"  placeholder="ejem: 150000" readonly>
+                {# <span id="aletras" class="enletras"></span> #}
+              {# <span disabled>abonando</span> #}
+          </td>
+          <td colspan="1">
+            <span id="vfactselect"></span>
+           
+            {# <button class="btn btn-success" type="button" onclick="Usar()">usar</button> #}
+          </td>
+
+          {# <td class="last"></td> #}
+        </tr>
+        {# linea5 #}
+        <tr>
+          <td><b>En letras</b></td>
+          <td colspan="3">
+            <textarea class="form-control areaconcepto" maxlength="200" id="id_aletras" name="enletras" readonly ></textarea>
+          </td>
+          {# <td class="last"></td> #}
+        </tr>
+        {# linea6 #}
+        <tr>
+          <td><b>Por concepto de :</b></td>
+          <td colspan="3">
+             {# <input type="text" class="input-large"> #}
+             <textarea class="form-control concepto" maxlength="200" rows="2" id="id_concepto" name="concepto" readonly></textarea>
+          </td>
+          {# <td class="last"></td> #}
+        </tr> 
+        <tr>
+        {# linea6 #}           
+          <td><b>Forma de pago:</b></td>
+          <td colspan="4">
+            <div class="funkyradio">
+              <div class="funkyradio-success">
+                  <input type="radio" name="forma_pago" id="radio1"  value="0"/>
+                  <label for="radio1" class="radio-inline">Cheque</label>
+              </div>
+              <div c

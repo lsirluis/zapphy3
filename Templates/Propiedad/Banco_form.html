@@ -1,0 +1,67 @@
+
+
+{% extends "Propiedad/Template_formulario.html" %}
+	
+	{%block DatosFormulario%}
+
+  {# {{form.administrador.value}} #}
+  {# {% if administrador %} #}
+  {# {{administrador}} #}
+  {# {% else %} #}
+    {# {{form.administrador.value}} #}
+  {# {% endif %} #}
+    <div class="form-group form-row field-administrador ">
+        
+	<input type="hidden" id="id_administrador" name="administrador" value="{% if administrador %}{{administrador}}{% else %}{{form.administrador.value}}{% endif %}">
+    </div>
+		<div class="form-group form-row field-banco ">
+        
+          <div class="col-xs-12 item">
+
+              <label class="control-label col-md-4 col-sm-4 col-xs-12" for="id_banco">{{form.banco.label}}</label><div class="col-md-5 col-sm-5 col-xs-12">
+          {{form.banco}}
+          <span class="errorlist">
+          {{form.banco.errors.as_text}}
+          </span>
+         </div></div>
+        
+
+      </div>
+      <div class="form-group form-row field-tipo_cuenta ">
+        
+          <div class="col-xs-12 item">
+              <label class="control-label col-md-4 col-sm-4 col-xs-12">{{form.tipo_cuenta.label}}</label><div class="col-md-5 col-sm-5 col-xs-12">
+          	{{form.tipo_cuenta}}
+          	{{form.tipo_cuenta.errors.as_text}}
+          </div></div>
+      </div>
+	  <div class="form-group form-row field-num_cuenta ">
+        
+          <div class="col-xs-12 item">
+            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="id_num_cuenta">{{form.num_cuenta.label}}</label>
+          <div class="col-md-5 col-sm-5 col-xs-12">{{form.num_cuenta}}
+          <span class="errorlist">
+          	{{form.num_cuenta.errors.as_text}}
+          </span>
+      	  </div>
+  		</div>
+        
+      </div>
+	<div class="form-group form-row field-propiedad ">
+        
+        <div class="col-xs-12 item">
+             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="id_propiedad">{{form.propiedad.label}}:</label>
+             <div class="col-md-5 col-sm-5 col-xs-12">
+          	     {{form.propiedad}}
+                <span class="errorlist">
+          	     {{form.propiedad.errors.as_text}}
+                </span>
+          </div>
+     	  </div>
+
+
+      </div>
+        
+
+	{%endblock%}
+	

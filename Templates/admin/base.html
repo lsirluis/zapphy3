@@ -1,0 +1,420 @@
+{# {% load staticfiles %} #}
+{% load admin_static staticfiles %}{% load suit_tags %}{% load url from suit_compat %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}{{ title }}{% endblock %} | ZAPPHY</title>
+    {# color de tema para navegador movil #}
+{# <meta name="theme-color" content="#2f96b4"> #}
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {# <title>Gentelella Alela! | </title> #}
+    <link rel="icon" type="image/png" href="{% static 'img/iconzapphy.png' %} " />
+
+    <!-- Bootstrap -->
+    <link href="{% static 'vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="{% static 'vendors/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="{% static 'vendors/nprogress/nprogress.css' %}" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="{% static 'vendors/iCheck/skins/flat/green.css' %}" rel="stylesheet">
+	
+    <!-- bootstrap-progressbar -->
+    <link href="{% static 'vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css' %}" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="{% static 'vendors/jqvmap/dist/jqvmap.min.css' %}" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.css' %}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="{% static 'build/css/custom.min.css' %}" rel="stylesheet">
+    {# <link rel="stylesheet" type="text/css" href="{% static 'suit/css/suit.css' %}" media="all"> #}
+  {% block extrastyle %}{% endblock %}
+   {% block extrahead %}{% endblock extrahead %}
+    <link href="{% static 'css/v2zapphy.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<script src="{% static 'vendors/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <!-- FastClick -->
+    <script src="{% static 'vendors/fastclick/lib/fastclick.js' %}"></script>
+    <!-- NProgress -->
+    <script src="{% static 'vendors/nprogress/nprogress.js' %}"></script>
+
+
+{# **********************plantilla vieja********************************** #}
+  <script type="text/javascript" src="/admin/jsi18n/"></script>
+
+  <script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+<script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+
+  </head>
+
+  <body class="nav-md ">
+    <div class="container body">
+      <div class="main_container">
+                  {% if not is_popup %}
+
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              {# <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a> #}
+              {# <div id="header" class="header"> #}
+              
+                <div id="branding">
+                  <span><a href="{% url 'admin:index' %} "class="site_title"><img src="{% static 'img/zapphy_text.png' %}" alt="" class="fa"></a></span>
+                </div>
+              {# </div> #}
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="/static/img/img.jpg" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>Bienvenido,</span>
+                <h2>
+                  {# {% block welcome-msg %} #}
+                  {# {% trans 'Welcome,' %} #}
+                  <strong>
+                    {# {% filter force_escape %} #}
+                      {% firstof user.first_name user.username %}</strong>.
+                {# {% endblock %} #}
+                </h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>Plataforma</h3>
+                <ul class="nav side-menu">
+                  {% url 'admin:index' as index_url %}
+                   <li{% if index_url == request.path %} class="active"{% endif %}>
+                     <a href="{{ index_url }}"><i class="fa fa-home"></i>Inicio
+                     </a>
+                   </li>
+                   {# ***************************************************#}
+                   <li {% if "Propiedad/listar"  in request.path %} class="active" {% elif "Propiedad/crear"  in request.path %} class="active"{% endif %}>
+                      <a ><i class="fa fa-building"></i>Propiedades<span class="{% if  'Propiedad/listar' in request.path or 'Propiedad/crear' in request.path %}fa fa-chevron-down {% else %} fa fa-chevron-right  {%endif%} "></span></a>
+                   <ul class="nav child_menu"  {% if "Propiedad/listar" in request.path %} style="display:block;"{% endif %}> 
+                      <li {% if "Propiedad/listar" in request.path %} class="current-page" {% endif %}>
+                        <a href="{% url 'Propiedad:Solicitud_listar' %}">
+                           Mis propiedades
+                        </a> 
+                        {# *********************************** #}
+                        {% block accioneslist %}
+                        {# <ul class="nav child_menu" style="display:blockd;"> #}
+                          {# <li class="sub_menu" ><a href="">carteh</a></li> #}
+                        {# </ul> #}
+                          
+                        {% endblock %}
+                    {# ************************** #}
+                      </li>
+                      <li {% if "Propiedad/crear" in request.path %} class="current-page" {% endif %}>
+                        <a href="{%url 'Propiedad:Solicitud_crearpro' %}">Agregar propiedad</a> 
+                      </li>
+                  </ul>
+                 </li>
+                 {# ***************************************************#}
+                 <li {% if  "Propiedad/bancos" in request.path %} class="active"{% endif %}><a ><i class="fa fa-bank"></i>Bancos</a>
+                   <ul class="nav child_menu">
+                      <li {% if "bancos/listar" in request.path %} class="current-page"{% endif %}>
+                          <a href="{%url 'Propiedad:Solicitud_listarBanco' %}">Mis Bancos
+                          </a> 
+                      </li>
+                      <li {% if "bancos/crear" in request.path %} class="current-page"{% endif %}>
+                          <a href="{%url 'Propiedad:Solicitud_crearBanco' %}">Agregar banco
+                          </a>
+                      </li>        
+                    </ul>
+                   </li>
+                 
+                </ul>
+              </div> {# menu section #}
+
+            </div> {# sidebarmenu #}
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+            <div class="sidebar-footer hidden-small footer_fixed">
+              <a data-toggle="tooltip" data-placement="top" title="Settings">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+
+          </div>
+        </div>
+
+        
+      {% endif %}
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav class="">
+
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                
+                <div class="zapphy_datetime">
+                  <span class="date"> {% suit_date %}</span>
+                  <span class="time" id="clock">{% suit_time %}</span>
+               </div>
+              </div>
+              {# <div class="nav navbar-nav"> #}
+              {# </div> #}
+              
+              <ul class="nav navbar-nav navbar-right">
+                
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="/static/img/img.jpg" alt="">{% firstof user.first_name user.username %}</strong>.
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;"> Profile</a></li>
+                    <li>
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
+                        <span>Settings</span>
+                      </a>
+                    </li>
+                    <li><a href="javascript:;">Help</a></li>
+                    <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                  </ul>
+                </li>
+
+                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+                <div class="right_col" role="main">
+          <div class="">
+ <!--           <div class="page-title">
+              <div class="title_left">
+                {# <h3>Plain Page</h3> #}
+              </div>
+
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <div class="row">
+              {% block breadcrumbs %}
+                <ul class="breadcrumb breadcrumless">
+                  <li><a href="{% url 'admin:index' %}">Inicio</a>
+                    {# {% if title %} #}
+                      <span class="divider">&raquo;</span>
+                      </li>
+
+                  {% for datos in breadurl %}
+                      {% if forloop.last %}
+                           <li class="active">
+                            <strong>
+                            {{datos.nombre}}
+                            </strong>
+                      {% else %}   
+                            <li>   
+                            {% if datos.arg %}
+                                {% if datos.arg2 %}
+                                <a href="{% url datos.url datos.arg datos.arg2%}">{{datos.nombre}}</a>
+                                {% else %}
+                                <a href="{% url datos.url datos.arg %}">{{datos.nombre}}</a>
+                                {% endif %}
+
+                            {% elif datos.url%}
+                                <a href="{% url datos.url %}">{{datos.nombre}}</a> 
+                            {% else %}
+                        <a href="">{{datos.nombre}}</a>                       {% endif %}                
+                      <span class="divider">&raquo;</span>
+                      {% endif %}
+                      
+                      </li>
+                  {% endfor %}
+                </ul>
+              {% endblock %}
+            {% block messages %}
+
+              {% if messages %}
+              {# hay un mensaje #}
+                {% for message in messages %}
+                  <div class="alert alert-{% firstof message.tags 'info' %}">
+                    <button class="close" data-dismiss="alert">×</button>
+                    <h2>{{ message }}</h2>
+                  </div>
+                {% endfor %}
+            {%else %}
+            {# no hay mensajes #}
+              {% endif %}
+            {% endblock messages %}
+
+              {% block content %}
+              {% endblock %} 
+            </div>
+
+            <div class="clearfix"></div>
+
+            
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Zapphy - La manera inteligente de administrar tus propiedades 
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    
+    <!-- Chart.js -->
+    <script src="{% static 'vendors/Chart.js/dist/Chart.min.js' %}"></script>
+    <!-- gauge.js -->
+    <script src="{% static 'vendors/gauge.js/dist/gauge.min.js' %}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js' %}"></script>
+    <!-- iCheck -->
+    <script src="{% static 'vendors/iCheck/icheck.min.js' %}"></script>
+    <!-- Skycons -->
+    <script src="{% static 'vendors/skycons/skycons.js' %}"></script>
+    <!-- Flot -->
+    <script src="{% static 'vendors/Flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.pie.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.time.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.stack.js' %}"></script>
+    <script src="{% static 'vendors/Flot/jquery.flot.resize.js' %}"></script>
+    <!-- Flot plugins -->
+    <script src="{% static 'vendors/flot.orderbars/js/jquery.flot.orderBars.js' %}"></script>
+    <script src="{% static 'vendors/flot-spline/js/jquery.flot.spline.min.js' %}"></script>
+    <script src="{% static 'vendors/flot.curvedlines/curvedLines.js' %}"></script>
+    <!-- DateJS -->
+    <script src="{% static 'vendors/DateJS/build/date.js' %}"></script>
+    <!-- JQVMap -->
+    <script src="{% static 'vendors/jqvmap/dist/jquery.vmap.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/dist/maps/jquery.vmap.world.js' %}"></script>
+    <script src="{% static 'vendors/jqvmap/examples/js/jquery.vmap.sampledata.js' %}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js' %}"></script>
+
+<!-- jquery.inputmask -->
+    <script src="{% static 'vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js' %}"></script>
+    <!-- Custom Theme Scripts -->
+    <!-- 
+-->
+    <script src=" {% static 'vendors/validator/validator.js' %}"></script>
+    <script src="{% static 'build/js/custom.min.js' %}"></script>
+    {% block extrajs %}
+      
+    {% endblock extrajs %}
+  </body>
+</html>
+                      

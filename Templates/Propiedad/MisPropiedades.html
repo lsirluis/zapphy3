@@ -1,0 +1,134 @@
+{% extends "admin/base_site.html" %}
+{% load staticfiles %}
+{% load tagsextra %}
+
+{% block title%} {{title}} {%endblock%}
+
+{% block content %}
+	{% for propiedad in object_list  %}
+	
+  <div class="col-md-4 col-sm-6 col-xs-12 profile_left">
+         <div class=" x_panel">
+			<div class="x_title">
+				<h2>{{propiedad.0.nombre|title|truncatechars:30}}</h2>
+		   		<div class="clearfix"></div>
+		   </div>
+          <div class="x_content ">
+                      <div class="profile_img">
+                        <div id="crop-avatar">
+                          <!-- Current avatar -->
+                          {# <img class="img-responsive avatar-view" src="images/picture.jpg" alt="Avatar" title="Change the avatar"> #}
+                          <img src="/media/{{ propiedad.0.Imagen}}" class="img-responsive avatar-view" {# WIDTH=160 HEIGHT=160 #}>
+                        </div>
+                      </div>
+                      {# <h3>{{propiedad.nombre|title}}</h3> #}
+<div class="divider"></div>
+                      <ul class="list-unstyled user_data">
+                        <li><i class="fa fa-map-marker user-profile-icon"></i>
+                        	Ubicacion: <b>{{propiedad.0.ciudad}}</b>
+                        </li>
+
+                        <li>
+                          <i class="fa fa-briefcase user-profile-icon"></i> 
+                          Tipo: <b>{{propiedad.0.get_tipo_display}}</b>
+                        </li>
+
+						 <li data-inputmask="'mask': '999-999999'">
+                          <i class="fa fa-phone user-profile-icon"></i> 
+                          Tel: <b>{{propiedad.0.telefono|addslashes|default:"no-registrado"|phonenumber}}</b>
+                        </li>
+
+						 <li data-inputmask="'mask': '999-999999'">
+                          <i class="fa fa-dollar user-profile-icon"></i> 
+                          Presupuesto: $ <b>{{propiedad.0.presupuesto_anual}}</b>
+                        </li>
+
+                        <li data-inputmask="'mask': '999-999999'">
+                          <i class="fa fa-sun-o user-profile-icon"></i> 
+                          Dia de cobro: <b>{{propiedad.0.dia_cobro}}</b>
+                        </li>
+                        <li>
+                          <i></i>
+                          Cantidad de Unidades: <b>{{propiedad.1}}</b> 
+                        </li>
+
+                  
+                      </ul>
+
+                      <a class="btn btn-success" href="{% url 'Propiedad:Solicitud_apartamentos' propiedad.0.idlegal %}"><i class="fa fa-home m-right-xs"></i> Ver Unidades</a>
+                      <br>
+					
+					</div>{# xcontent #}
+                    </div>{# xpanel #}
+                    </div>
+
+
+{% endfor %}
+ <div class="col-xs-12">
+                    	
+<ul class="pager">
+  	{# <li> #}
+  		{# cantidad de paginas: {{paginator.num_pages}} y numero de la siguiente pagina #}
+
+  		{%if object_list2.has_previous %}
+  		<a class="btn btn-info" href="?page={{page_obj.previous_page_number}}">Anterior</a>
+  		{%endif%}
+  	{# </li> #}
+        <span class="current">
+          	  		pagina {{ object_list2.number }} de {{ object_list2.paginator.num_pages }}.
+        </span>
+          	{# <li> #}
+  		{%if object_list2.has_next %} {# and paginator.num_pages != page_obj.next_page_number #}
+  			<a class="btn btn-info" href="?page={{page_obj.next_page_number}}">Siguiente &raquo;</a>
+  		{%endif%}
+  	{# </li> #}
+  </ul>
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+	<table>
+			estos son las propiedades en la base de datos
+
+		<thead>
+		<tr>
+			<td>#. identificacion</td>
+			<td>Nombre</td>
+			<td>Direccion</td>
+			<td>Administrador</td>
+
+		</tr>
+		</thead>
+		<tbody>
+			<br>
+			{% if propiedades %} 
+				si hay propiedades	
+				{% for datos in propiedades  %}
+					<tr>
+					<td>{{ datos.identificacion }}</td>
+					<td>{{ datos.nombre }}</td>
+					<td>{{ datos.direccion}}</td>
+					<td>({{ datos.administrador_id}}) {{ datos.administrador.nombre}}  {{ datos.administrador.apellido}}</td>
+					</tr>
+				{% endfor %}
+
+			{% else %}
+				no hay propiedades
+			{% endif %}
+
+		</tbody>
+	</table>
+-->
+	{% endblock%}

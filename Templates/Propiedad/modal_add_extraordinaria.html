@@ -1,0 +1,213 @@
+{% load staticfiles %}
+ <link rel="stylesheet" href="{% static 'css/radiocheckbox.css' %}">
+
+<script>
+	function showaddextra(){
+		$('#ModalExtraordinaria').modal('show');
+
+	};
+
+	$(document).ready(function(){
+
+		// para ajax
+		$('#id_addcuotaextra').on('submit', function(event){
+		    event.preventDefault();
+		           event.stopPropagation();
+        event.stopImmediatePropagation();
+		    console.log("form cuotas ingresado!");
+		    var frm = $('#id_addcuotaextra');
+		    Reportcuotaextra(frm);
+	  });
+
+
+
+		refreshvalor();
+		function calextra(){
+			// alert("se calculara");
+			var cunidades =parseInt({{apartamentos.count|default:"0"}});
+			var valor = 0;
+			var cuotas = 0;
+			cuotas = parseInt(cuotas + $("#id_cuotas").val());
+			valor =parseInt(valor + $("#id_valor").val());
+			var resultado = parseInt((valor/cunidades)/cuotas);
+			// return resultado;
+			$("#valtotal").html("$ "+resultado + " pesos mensuales");
+
+		}
+		function refreshvalor(){
+			var radiose = $("input[name=tipo_cuota]:checked").val();
+			if (radiose == 1) {
+				$("#todasunidades").hide();
+			}else{
+				$("#todasunidades").show();
+				calextra();
+			}
+		}
+
+		$("#id_cuotas").on('change', function(event){
+			calextra();
+		});
+		$("#id_cuotas").on('keyup', function(event){
+			calextra();
+		});
+		$("#id_valor").on('change', function(event){
+			calextra();
+		});
+		$("#id_valor").on('keyup', function(event){
+			calextra();
+		});
+		$("input[name=tipo_cuota").on('change', function(event){
+			refreshvalor();
+		
+	});
+	});
+</script>
+
+
+<div id="ModalExtraordinaria"  class="modal fade in" style="display:none;">
+  
+     <div class="modal-dialog ">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+      	<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cuotas extraordinarias</h4>
+     	</div>
+		<form action="" name="addcuotaextra" method="post" id="id_addcuotaextra">
+			{% csrf_token %}
+	    <input type="hidden" name="propiedad" id="propiedad" value="{{DatosPropiedad.idlegal}}">
+     <div class="modal-body col-xs-12">
+			<div class="col-xs-12"> {# para ver las cuotas activas#}
+				{# Ver las cuotas activas y su informacion #}
+			</div>
+			<div class="col-xs-12">{# para agregar una cuota extra#}
+				{# ********************************************** #}
+				<div class="form-group">
+					<div class="col-xs-12">
+				<div class="col-xs-12 col-md-2">
+					<label for="">Valor: </label>
+				</div>
+				<div class="col-xs-12 col-md-4">
+
+					<input type="number" id="id_valor" name="valor" class="input-mediums form-control" min="0" placeholder="ejemplo: 50000" step="1000">
+				</div>
+				{# ********************************************** #}
+				<div class="col-xs-12 col-md-3">
+					<label for="">Cantidad de cuotas:</label>
+				</div>	
+				<div class="col-xs-12 col-md-3">
+
+					<input type="number" min="1" value="1" name="cuotas" id="id_cuotas" class="mdinpsut form-control">
+				</div>
+				</div>
+				</div>{#/ form grup#}
+				{# ********************************************** #}
+				<br>
+				<div class="form-group">
+				<div class="col-xs-12">
+					<label for="" class="control-label col-xs-12 col-sm-2">Tipo de cuotas:</label>
+					<div class="col-xs-12 col-sm-8">
+					  <div class="funkyradio">
+              			<div class="funkyradio-success col-xs-12 col-sm-4">
+                  			<input type="radio" name="tipo_cuota" id="radio5"  value="0"/>
+                  			<label for="radio5" class=""> iguales</label>
+                  		</div>
+              			<div class="funkyradio-success col-xs-12 col-sm-5">
+                		  <input type="radio" name="tipo_cuota" id="radio6"  value="1" checked/>
+                 			<label for="radio6" class="">coeficiente
+                 			</label>
+              			</div>              
+             		</div>
+
+					</div>
+					<div class="divider col-xs-12"></div>
+             	<div class="" id="todasunidades" style="display:n{% load staticfiles %}
+ <link rel="stylesheet" href="{% static 'css/radiocheckbox.css' %}">
+
+<script>
+	function showaddextra(){
+		$('#ModalExtraordinaria').modal('show');
+
+	};
+
+	$(document).ready(function(){
+
+		// para ajax
+		$('#id_addcuotaextra').on('submit', function(event){
+		    event.preventDefault();
+		           event.stopPropagation();
+        event.stopImmediatePropagation();
+		    console.log("form cuotas ingresado!");
+		    var frm = $('#id_addcuotaextra');
+		    Reportcuotaextra(frm);
+	  });
+
+
+
+		refreshvalor();
+		function calextra(){
+			// alert("se calculara");
+			var cunidades =parseInt({{apartamentos.count|default:"0"}});
+			var valor = 0;
+			var cuotas = 0;
+			cuotas = parseInt(cuotas + $("#id_cuotas").val());
+			valor =parseInt(valor + $("#id_valor").val());
+			var resultado = parseInt((valor/cunidades)/cuotas);
+			// return resultado;
+			$("#valtotal").html("$ "+resultado + " pesos mensuales");
+
+		}
+		function refreshvalor(){
+			var radiose = $("input[name=tipo_cuota]:checked").val();
+			if (radiose == 1) {
+				$("#todasunidades").hide();
+			}else{
+				$("#todasunidades").show();
+				calextra();
+			}
+		}
+
+		$("#id_cuotas").on('change', function(event){
+			calextra();
+		});
+		$("#id_cuotas").on('keyup', function(event){
+			calextra();
+		});
+		$("#id_valor").on('change', function(event){
+			calextra();
+		});
+		$("#id_valor").on('keyup', function(event){
+			calextra();
+		});
+		$("input[name=tipo_cuota").on('change', function(event){
+			refreshvalor();
+		
+	});
+	});
+</script>
+
+
+<div id="ModalExtraordinaria"  class="modal fade in" style="display:none;">
+  
+     <div class="modal-dialog ">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+      	<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Cuotas extraordinarias</h4>
+     	</div>
+		<form action="" name="addcuotaextra" method="post" id="id_addcuotaextra">
+			{% csrf_token %}
+	    <input type="hidden" name="propiedad" id="propiedad" value="{{DatosPropiedad.idlegal}}">
+     <div class="modal-body col-xs-12">
+			<div class="col-xs-12"> {# para ver las cuotas activas#}
+				{# Ver las cuotas activas y su informacion #}
+			</div>
+			<div class="col-xs-12">{# para agregar una cuota extra#}
+				{# ********************************************** #}
+				<div class="form-group">
+					<div class="col-xs-12">
+				<div class="col-xs-12 col-md-2">
+					<label for="">Valor:
